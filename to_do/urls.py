@@ -18,11 +18,13 @@ from rest_framework import routers
 from django.urls import path,include
 from api import views
 
-router = routers.SimpleRouter()
+router = routers.DefaultRouter()
 router.register(r'lists',views.ListView,'list')
+router.register(r'todoviews',views.ToDoView,'todoview')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include(router.urls)),
+    path('api/',include(router.urls)),
     path('',include("frontend.urls")),
-]
+] 
+
