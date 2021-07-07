@@ -5,7 +5,7 @@ from rest_framework import generics, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import to_do
-from .serializers import todoSerializer
+from .serializers import todoSerializer,todoPostSerializer
 
 # pk is only used when primary key is use in url
 # GET -> retrieve(self, request, pk, format=None)
@@ -25,5 +25,13 @@ class ToDoView(viewsets.ViewSet):
         todo_list=to_do.objects.all()
         serializer = todoSerializer(todo_list, many=True)
         return Response(serializer.data)
+
+    def create(self, request, format=None, *args, **kwargs):
+        serializer = todoPostSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'valid':True})
+        else:
+            return Response({'valid':False})
 
     
