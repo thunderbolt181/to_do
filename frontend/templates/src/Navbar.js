@@ -1,4 +1,5 @@
-import logo from './logo192.png'
+import logo from './logo192.png';
+import {Link} from 'react-router-dom';
 
 const Navbar = () => {
     return ( 
@@ -8,7 +9,7 @@ const Navbar = () => {
                 <h1 className="m-auto p-2">TO-DO</h1>
             </div>
             <div className="p-1">
-                <button>Create New</button>
+                <Link className="link" to="/">Home</Link>
             </div>
             
         </div>

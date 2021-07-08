@@ -1,4 +1,6 @@
 import GetRequest from "./getrequest";
+import { useEffect,useState } from "react";
+import { Link } from "react-router-dom";
 
 const ToDoList = () => {
     let options = {  
@@ -7,9 +9,31 @@ const ToDoList = () => {
     };  
     
     const {data:todolist, ispending, error} = GetRequest('api/todoviews');
+    const [counting, setCounting] = useState(false);
 
+    useEffect(() => {
+        var t =0;
+        var f = 0;
+        if (todolist!=null){
+            for(var i=0;i< Object.keys(todolist).length;i++){
+                if (todolist[i.toString()]['completed']){
+                    t+=1;
+                }else{
+                    f+=1;
+                }
+            }
+        }
+        setCounting(`Completed:${t} Pending:${f}`);
+    },[todolist]);
+    
     return ( 
         <div className="to-do">
+            <div className="card mb-2" >
+                <div className={'card-header border rounded d-flex flex-row justify-content-between'}>
+                    {counting && <h3 className="card-title my-auto">{counting}</h3>}
+                    <Link to="/create" className="btn btn-primary" >Create New</Link>
+                </div>
+            </div>
             {error && <div>{error}</div>}
             {ispending && <div>Loading..</div>}
             {todolist && <div>{todolist.map((item) => (

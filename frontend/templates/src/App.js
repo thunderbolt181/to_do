@@ -13,7 +13,7 @@ function App() {
             <Route exact path="/">
               <ToDoList/>
             </Route>
-            <Route exact path="/detail">
+            <Route exact path="/create">
               <Createtodo/>
             </Route>
           </Switch>
