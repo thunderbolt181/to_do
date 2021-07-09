@@ -44,7 +44,13 @@ const ToDoList = () => {
                     </div>
                     <div className="card-body">
                         <p className="card-text">{item.tasks}</p>
-                        <p className="mb-0 text-end text-secondary">{new Date(item.created_at).toLocaleTimeString("en-us", options)}</p>
+                        <div className="d-flex f-row justify-content-between">
+                            <div className="my-auto mx-2">
+                                Completed :  {item.completed && <i className="fa fa-check" style={{color:'green'}} aria-hidden="true"></i>}
+                                {!item.completed && <i className="fa fa-times" style={{color:'red'}} aria-hidden="true"></i>}
+                            </div>
+                            <p className="mb-0 text-end text-secondary">{new Date(item.created_at).toLocaleTimeString("en-us", options)}</p>
+                        </div>
                     </div>
                 </div>
             ))}</div>}
