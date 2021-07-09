@@ -15,11 +15,7 @@ const GetRequest = (url) => {
             })
             .catch((err) => {
                 setIsPending(false);
-                if (err.response.status === 500){
-                    setError("Cannot Connect to the server!");
-                }else{
-                    setError(err.message);
-                }
+                setError(err.message);
             })
         },[url]);
 

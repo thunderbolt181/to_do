@@ -10,3 +10,8 @@ class todoPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = to_do
         fields = ['title','tasks']
+
+class todoPutSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = to_do
+        fields = ['title','tasks','completed']

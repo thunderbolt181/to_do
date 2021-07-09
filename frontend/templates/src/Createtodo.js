@@ -5,11 +5,12 @@ import {getCookie} from "./csrfToken";
 const Createtodo = () => {
 
     const [title, setTitle] = useState("");
-    const [task, setTask] = useState("");
+    const [tasks, setTasks] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const todolist = {title, task}
+        const todolist = {title, tasks}
+        console.log(todolist)
         axios.post('api/todoviews/',JSON.stringify(todolist),{
             headers:{
                     'Content-Type': 'application/json',
@@ -33,7 +34,7 @@ const Createtodo = () => {
                         <label >Title</label>
                         <input type="text" required value={title} onChange={(e) => setTitle(e.target.value)}/>
                         <label>Task</label>
-                        <textarea required value={task} onChange={(e) => setTask(e.target.value)} ></textarea>
+                        <textarea required value={tasks} onChange={(e) => setTasks(e.target.value)} ></textarea>
                         <button className="btn btn-primary">Create Task</button>
                     </form>
                 </div>

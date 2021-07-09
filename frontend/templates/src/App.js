@@ -2,6 +2,7 @@ import Navbar from './Navbar';
 import ToDoList from './todolist';
 import Createtodo from './Createtodo';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import EditToDo from './EditTodo';
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
             </Route>
             <Route exact path="/create">
               <Createtodo/>
+            </Route>
+            <Route exact path="/edit/:id">
+              <EditToDo/>
             </Route>
           </Switch>
         </div>

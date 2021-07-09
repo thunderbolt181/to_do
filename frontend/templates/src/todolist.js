@@ -40,7 +40,7 @@ const ToDoList = () => {
                 <div className="card mb-5" key={item.id}>
                     <div className={'card-header border rounded d-flex flex-row justify-content-between'}>
                         <h3 className="card-title my-auto">{item.title}</h3>
-                        <a href="/" className="btn btn-primary" >Edit</a>
+                        <Link to={`/edit/${item.id}`} className="btn btn-primary" >Edit</Link>
                     </div>
                     <div className="card-body">
                         <p className="card-text">{item.tasks}</p>
