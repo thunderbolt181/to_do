@@ -5,7 +5,7 @@ const GetRequest = (url) => {
 
     const [data, setData] = useState(null);
     const [ispending, setIsPending] = useState(true);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         axios.get(url)

@@ -10,31 +10,40 @@ const ToDoList = () => {
     
     const {data:todolist, ispending, error} = GetRequest('api/todoviews');
     const [counting, setCounting] = useState(false);
+    const [loader,setLoader] = useState(false);
 
     useEffect(() => {
-        var t =0;
-        var f = 0;
-        if (todolist!=null){
-            for(var i=0;i< Object.keys(todolist).length;i++){
-                if (todolist[i.toString()]['completed']){
-                    t+=1;
-                }else{
-                    f+=1;
+        if (error == null){
+            if (todolist!=null){
+                var t =0;
+                var f = 0;
+                for(var i=0;i< Object.keys(todolist).length;i++){
+                    if (todolist[i.toString()]['completed']){
+                        t+=1;
+                    }else{
+                        f+=1;
+                    }
                 }
             }
+            setCounting(`Completed:${t} Pending:${f}`);
+            setLoader(true);
         }
-        setCounting(`Completed:${t} Pending:${f}`);
-    },[todolist]);
+        if (error != null){
+            setLoader(true);
+        }
+    },[todolist,error]);
     
     return ( 
         <div className="to-do">
-            <div className="card mb-2" >
+            {!loader ? (<div className="justify-content-center d-flex"><div className="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div></div>):
+            (<div>
+                <div className="card mb-2" >
                 <div className={'card-header border rounded d-flex flex-row justify-content-between'}>
                     {counting && <h3 className="card-title my-auto">{counting}</h3>}
                     <Link to="/create" className="btn btn-primary" >Create New</Link>
                 </div>
             </div>
-            {error && <div>{error}</div>}
+            {error && <div className="alert alert-danger bg-color-primary" role="alert">{error}</div>}
             {ispending && <div>Loading..</div>}
             {todolist && <div>{todolist.map((item) => (
                 <div className="card mb-5" key={item.id}>
@@ -53,7 +62,8 @@ const ToDoList = () => {
                         </div>
                     </div>
                 </div>
-            ))}</div>}
+            ))}</div>}    
+            </div>)}
         </div>
      );
 }

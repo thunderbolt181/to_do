@@ -53,9 +53,11 @@ class ToDoView(viewsets.ViewSet):
     def partial_update(self,request,*args,**kwargs):
         instance = self.get_object()
         serializer = todoPutSerializer(instance, data=request.data,partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response({'valid':True})
+        else:
+            return Response({'valid':False})
 
     # def destroy(self, request, *args,**kwargs):
     #     print(kwargs['pk'])
