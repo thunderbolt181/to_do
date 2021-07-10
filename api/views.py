@@ -52,10 +52,8 @@ class ToDoView(viewsets.ViewSet):
 
     def partial_update(self,request,*args,**kwargs):
         instance = self.get_object()
-        print(request.data)
         serializer = todoPutSerializer(instance, data=request.data,partial=True)
         serializer.is_valid(raise_exception=True)
-        print(serializer.validated_data)
         serializer.save()
         return Response(serializer.data)
 

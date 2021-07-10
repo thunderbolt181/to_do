@@ -7,21 +7,19 @@ import GetRequest from "./getrequest";
 const EditToDo = () => {
     const {id} = useParams()
     const [title, setTitle] = useState("");
-    const [task, setTasks] = useState("");
+    const [task, setTask] = useState("");
     const [completed, setCompleted] = useState(null);
     const [loading,setLoading] = useState(false);
-    const url = 'http://localhost:8000/api/todoviews/'+id
 
-    const  {data:todolist, ispending,error} = GetRequest(url);
+    const {data:todolist, ispending,error} = GetRequest(`/api/todoviews/${id}`);
 
     useEffect(() => {
-        console.log(error);
-        if(!error){
-            setTasks(todolist.tasks);
+        if(todolist != null){
             setTitle(todolist.title);
+            setTask(todolist.tasks);
             setCompleted(todolist.completed);
         }
-    }, [ispending,todolist,error])
+    }, [todolist])
 
     const handleValue = () => {
         let value = {};
@@ -41,7 +39,7 @@ const EditToDo = () => {
         e.preventDefault()
         setLoading(true);
         const todolist = handleValue();
-        axios.patch(`${url}/`,JSON.stringify(todolist),{
+        axios.patch(`/api/todoviews/${id}/`,JSON.stringify(todolist),{
             headers:{
                     'Content-Type': 'application/json',
                     "X-CSRFToken": getCookie('csrftoken')
@@ -73,9 +71,9 @@ const EditToDo = () => {
                     </div>
                     <input type="text" required value={title} onChange={(e) => setTitle(e.target.value)}/>
                     <h2>Task</h2>
-                    <textarea required value={task} onChange={(e) => setTasks(e.target.value)} ></textarea>
+                    <textarea required value={task} onChange={(e) => setTask(e.target.value)} ></textarea>
                     {!loading && <button className="btn btn-primary" onClick={handleSubmit}>Save</button>}
-                    {loading && <div class="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div>}
+                    {loading && <div className="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div>}
                 </form>
                 </div>
             </div>
