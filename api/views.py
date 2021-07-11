@@ -22,9 +22,6 @@ class ListView(viewsets.ModelViewSet):
 
 class ToDoView(viewsets.ViewSet):
 
-    def get_queryset(self):
-        return self.queryset
-
     def get_object(self):
         pk = self.kwargs['pk']
         try:
@@ -45,10 +42,10 @@ class ToDoView(viewsets.ViewSet):
     def create(self, request, *args, **kwargs):
         serializer = todoPostSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
-            return Response({'valid':True})
+            obj = serializer.save()
+            return Response({'valid':True,'id':obj.id})
         else:
-            return Response({'valid':False})
+            return Response({'valid':False},status=status.HTTP_404_NOT_FOUND)
 
     def partial_update(self,request,*args,**kwargs):
         instance = self.get_object()
@@ -57,10 +54,11 @@ class ToDoView(viewsets.ViewSet):
             serializer.save()
             return Response({'valid':True})
         else:
-            return Response({'valid':False})
+            return Response({'valid':False},status=status.HTTP_404_NOT_FOUND)
 
-    # def destroy(self, request, *args,**kwargs):
-    #     print(kwargs['pk'])
-    #     return Response(({"http_method":"DELETE"}))
+    def destroy(self, request, *args,**kwargs):
+        instance = self.get_object()
+        instance.delete()
+        return Response({"valid":True})
 
     

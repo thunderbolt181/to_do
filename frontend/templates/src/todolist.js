@@ -14,9 +14,9 @@ const ToDoList = () => {
 
     useEffect(() => {
         if (error == null){
+            var t =0;
+            var f = 0;
             if (todolist!=null){
-                var t =0;
-                var f = 0;
                 for(var i=0;i< Object.keys(todolist).length;i++){
                     if (todolist[i.toString()]['completed']){
                         t+=1;

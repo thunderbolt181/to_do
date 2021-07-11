@@ -1,22 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
 import {getCookie} from "./csrfToken";
+import { useHistory } from "react-router-dom";
 
 const Createtodo = () => {
-
+    const history = useHistory();
     const [title, setTitle] = useState("");
     const [tasks, setTasks] = useState("");
     const [loading,setLoading] = useState(false);
     const [errors,setErrors] = useState(null);
-
-    const handleSuccess = (success) => {
-        console.log(success)
-        if (success){
-            return `<div class="alert alert-success bg-color-primary" role="alert">A new Task has been added</div>`
-        }else{
-            return `<div class="alert alert-danger" role="alert">Looks like you entered something wrong</div>`
-        }
-    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -30,9 +22,10 @@ const Createtodo = () => {
                     }
                 })
                 .then(res => {
-                    setLoading(false);
-                    var msg = handleSuccess(res.data.valid)
-                    document.getElementById('submitalert').innerHTML=msg
+                    setLoading(false)
+                    if (res.data.valid){
+                        history.push(`/edit/${res.data.id}`)
+                    }
                 }).catch((err) => {
                     setLoading(false);
                     setErrors(err.message);
@@ -49,7 +42,6 @@ const Createtodo = () => {
                 <div className="card-body">
                     {errors && <div className="alert alert-danger" role="alert">{errors}</div>}
                     <form className="d-flex flex-column" onSubmit={handleSubmit}>
-                        <div id="submitalert"></div>
                         <label >Title</label>
                         <input type="text" required value={title} onChange={(e) => setTitle(e.target.value)}/>
                         <label>Task</label>

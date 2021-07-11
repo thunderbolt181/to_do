@@ -3,19 +3,22 @@ import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {getCookie} from "./csrfToken";
 import GetRequest from "./getrequest";
+import { useHistory } from "react-router-dom";
 
 const EditToDo = () => {
     let options = {  
         weekday: "long", year: "numeric", month: "short",  
         day: "numeric", hour: "2-digit", minute: "2-digit"  
     };  
-    const {id} = useParams()
+    const {id} = useParams();
+    const history = useHistory();
     const [title, setTitle] = useState("");
     const [task, setTask] = useState("");
     const [completed, setCompleted] = useState(null);
     const [loading,setLoading] = useState(false);
     const [loader,setLoader] = useState(false);
     const [created,setCreated] = useState(null);
+    // const [confirmdelete, setConfirmdelete] = useState(false)
 
     const {data:todolist, ispending,error} = GetRequest(`/api/todoviews/${id}`);
     const [errors,setErrors] = useState(error);
@@ -92,12 +95,31 @@ const EditToDo = () => {
         }
     }
 
+    const handleDelete = (e) => {
+        e.preventDefault()
+        axios.delete(`/api/todoviews/${id}/`,{
+            headers:{
+                "X-CSRFToken": getCookie('csrftoken')
+            }
+        })
+        .then(res => {
+            if (res.data.valid){
+                history.push('/')
+            }
+        }).catch(err => {
+            setErrors(err.message);
+        })
+    }
+
     return (
         <div className="create">
             {!loader ? (<div className="justify-content-center d-flex"><div className="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div></div>):
             (<div className="card mb-5">
-                <div className={'card-header border rounded d-flex'}>
-                    <h1 className="card-title m-auto">Edit</h1>
+                <div className={'card-header border rounded d-flex flex-row justify-content-between'}>
+                    <h1 className="card-title my-auto">Edit</h1>
+                    <div className="my-auto mx-4" onClick={handleDelete} >
+                        <i className="fa fa-trash" style={{color:'red',fontSize:'24px'}} aria-hidden="true" ></i>
+                    </div>
                 </div>
                 <div className="card-body">
                     {errors && <div className="alert alert-danger" role="alert">{errors}</div>}
