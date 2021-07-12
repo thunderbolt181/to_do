@@ -1,6 +1,6 @@
 import os
 from django.shortcuts import render
-from rest_framework import generics, viewsets
+from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import to_do

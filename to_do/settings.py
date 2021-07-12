@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'users.apps.UsersConfig',
     'frontend.apps.FrontendConfig',
     'api.apps.ApiConfig',
     'rest_framework',
