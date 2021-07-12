@@ -1,12 +1,16 @@
 from django.shortcuts import render
-from .serializers import userSerializer
+from .serializers import userSerializer, RegisterSerializer
 from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework.response import Response
 
-class LoginView(viewsets.ModelViewSet):
+class RegisterView(viewsets.ModelViewSet):
 
-    def list(self, request, *args, **kwargs):
-        print("accessable")
-        return Response({"Login Method":"GET"})
+    def create(self, request, *args, **kwargs):
+        serializer = RegisterSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'valid':True})
+        else:
+            return Response(serializer.errors)
         
