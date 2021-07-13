@@ -18,13 +18,13 @@ class RegisterSerializer(serializers.ModelSerializer):
         }
 
     def save (self):
+        if self.validated_data['password'] != self.validated_data['password2']:
+            raise serializers.ValidationError("Passwords Do Not Match")
         user = User(
             email = self.validated_data['email'],
             username = self.validated_data['username'],
             first_name = self.validated_data['first_name'],
-            last_name=self.validated_data['last_name']
+            last_name=self.validated_data['last_name'],
         )
-        if self.validated_data['password'] != self.validated_data['password2']:
-            raise serializers.ValidationError("Passwords Do Not Match")
-        user.password = self.validated_data['password']
+        user.set_password(self.validated_data['password'])
         user.save()

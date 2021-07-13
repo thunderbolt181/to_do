@@ -24,7 +24,6 @@ router = routers.DefaultRouter()
 router.register(r'lists',apiviews.ListView,'list')
 router.register(r'todoviews',apiviews.ToDoView,'todoview')
 router.register(r'register',usersviews.RegisterView,'register')
-# router.register(r'login',obtain_auth_token,'login')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
