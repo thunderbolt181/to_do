@@ -18,15 +18,18 @@ from rest_framework import routers
 from django.urls import path,include
 from api import views as apiviews
 from users import views as usersviews
+from rest_framework.authtoken.views import obtain_auth_token
 
 router = routers.DefaultRouter()
 router.register(r'lists',apiviews.ListView,'list')
 router.register(r'todoviews',apiviews.ToDoView,'todoview')
 router.register(r'register',usersviews.RegisterView,'register')
+# router.register(r'login',obtain_auth_token,'login')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include(router.urls)),
     path('',include("frontend.urls")),
+    path('login',obtain_auth_token, name='login')
 ] 
 
