@@ -1,6 +1,4 @@
-// import axios from "axios";
 import { useState } from "react";
-// import {getCookie} from "./csrfToken";
 import { useHistory } from "react-router-dom";
 import PostRequest from "./request/postrequest";
 
@@ -11,12 +9,11 @@ const Createtodo = () => {
     const [loading,setLoading] = useState(false);
     const [errors,setErrors] = useState(null);
 
-    const handlePost = async (values) => {
+     const handlePost = async (values) => {
         const {data,error} = await PostRequest('api/todoviews/',values);
-        console.log(data,error)
         if (data != null){
             setLoading(false);
-            history.push(`/edit/${data}`)
+            history.push(`/edit/${data.id}`)
         }
         if (error != null){
             setLoading(false);
