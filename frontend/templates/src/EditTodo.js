@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {getCookie} from "./csrfToken";
-import GetRequest from "./getrequest";
+import GetRequest from "./request/getrequest";
 import { useHistory } from "react-router-dom";
 
 const EditToDo = () => {

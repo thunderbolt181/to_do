@@ -14,7 +14,6 @@ class RegisterView(viewsets.ModelViewSet):
             serializer.save()
             user = User.objects.select_related('auth_token').get(username=serializer.data['username'])
             data = {'username':serializer.data['username'],'email':serializer.data['email'],'token':user.auth_token.key}
-            print(user.password)
             return Response(data)
         else:
             return Response(serializer.errors)

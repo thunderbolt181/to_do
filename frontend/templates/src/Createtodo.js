@@ -1,7 +1,8 @@
-import axios from "axios";
+// import axios from "axios";
 import { useState } from "react";
-import {getCookie} from "./csrfToken";
+// import {getCookie} from "./csrfToken";
 import { useHistory } from "react-router-dom";
+import PostRequest from "./request/postrequest";
 
 const Createtodo = () => {
     const history = useHistory();
@@ -10,26 +11,25 @@ const Createtodo = () => {
     const [loading,setLoading] = useState(false);
     const [errors,setErrors] = useState(null);
 
+    const handlePost = async (values) => {
+        const {data,error} = await PostRequest('api/todoviews/',values);
+        console.log(data,error)
+        if (data != null){
+            setLoading(false);
+            history.push(`/edit/${data}`)
+        }
+        if (error != null){
+            setLoading(false);
+            setErrors(error);
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
         const values = {title, tasks}
         if(Object.keys(values).length > 0){
             setLoading(true);
-            axios.post('api/todoviews/',JSON.stringify(values),{
-                headers:{
-                        'Content-Type': 'application/json',
-                        "X-CSRFToken": getCookie('csrftoken')
-                    }
-                })
-                .then(res => {
-                    setLoading(false)
-                    if (res.data.valid){
-                        history.push(`/edit/${res.data.id}`)
-                    }
-                }).catch((err) => {
-                    setLoading(false);
-                    setErrors(err.message);
-                })
+            handlePost(values);
         }
     }
 
