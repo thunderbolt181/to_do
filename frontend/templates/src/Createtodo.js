@@ -24,10 +24,8 @@ const Createtodo = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const values = {title, tasks}
-        if(Object.keys(values).length > 0){
-            setLoading(true);
-            handlePost(values);
-        }
+        setLoading(true);
+        handlePost(values);
     }
 
     return (

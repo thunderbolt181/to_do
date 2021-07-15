@@ -1,9 +1,9 @@
-import axios from "axios";
 import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
-import {getCookie} from "./csrfToken";
 import GetRequest from "./request/getrequest";
 import { useHistory } from "react-router-dom";
+import PatchRequest from "./request/patchrequest";
+import DeleteRequest from "./request/deleterequest";
 
 const EditToDo = () => {
     let options = {  
@@ -18,7 +18,6 @@ const EditToDo = () => {
     const [loading,setLoading] = useState(false);
     const [loader,setLoader] = useState(false);
     const [created,setCreated] = useState(null);
-    // const [confirmdelete, setConfirmdelete] = useState(false)
 
     const {data:todolist, ispending,error} = GetRequest(`/api/todoviews/${id}`);
     const [errors,setErrors] = useState(error);
@@ -39,7 +38,6 @@ const EditToDo = () => {
     }, [todolist,error])
 
     const handleSuccess = (success) => {
-        console.log(success)
         if (success){
             return `<div class="alert alert-success bg-color-primary" role="alert">Changes have been made Successfully</div>`
         }else{
@@ -69,46 +67,43 @@ const EditToDo = () => {
         return value
     }
 
+    const handlePatch = async (values) => {
+        const {data,error} = await PatchRequest(`/api/todoviews/${id}/`,values);
+        if (data != null){
+            setLoading(false);
+            todolist.title = title;
+            todolist.tasks = task;
+            todolist.completed = completed;
+            var msg = handleSuccess(data.valid)
+            values = {};
+            document.getElementById('submitalert').innerHTML=msg
+        }
+        if (error != null){
+            setLoading(false);
+            setErrors(error);
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
         var values = handleValue();
         if(Object.keys(values).length > 0){
             setLoading(true);
-            axios.patch(`/api/todoviews/${id}/`,JSON.stringify(values),{
-                headers:{
-                        'Content-Type': 'application/json',
-                        "X-CSRFToken": getCookie('csrftoken')
-                    }
-                })
-                .then(res => {
-                    setLoading(false);
-                    todolist.title = title;
-                    todolist.tasks = task;
-                    todolist.completed = completed;
-                    var msg = handleSuccess(res.data.valid)
-                    values = {};
-                    document.getElementById('submitalert').innerHTML=msg
-                }).catch((err) => {
-                    setLoading(false);
-                    setErrors(err.message);
-                })
+            handlePatch(values);
         }
     }
 
-    const handleDelete = (e) => {
+    const handleDelete = async (e) => {
         e.preventDefault()
-        axios.delete(`/api/todoviews/${id}/`,{
-            headers:{
-                "X-CSRFToken": getCookie('csrftoken')
-            }
-        })
-        .then(res => {
-            if (res.data.valid){
+        const {data,error} = await DeleteRequest(`/api/todoviews/${id}/`)
+        if (data != null){
+            if (data.valid){
                 history.push('/')
             }
-        }).catch(err => {
-            setErrors(err.message);
-        })
+        }
+        if (error != null){
+            setErrors(error);
+        }
     }
 
     return (

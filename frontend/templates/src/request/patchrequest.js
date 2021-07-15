@@ -5,7 +5,7 @@ const PostRequest = (url,values) => {
     async function createPost(url,values) {
       var data = null;
       var error = null;
-      await axios.post(url,JSON.stringify(values),{
+      await axios.patch(url,JSON.stringify(values),{
           headers:{
                   'Content-Type': 'application/json',
                   "X-CSRFToken": getCookie('csrftoken')
