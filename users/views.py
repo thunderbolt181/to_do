@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
-from django.http import JsonResponse
+from rest_framework import status
 
 class RegisterView(viewsets.ModelViewSet):
 
@@ -17,3 +17,13 @@ class RegisterView(viewsets.ModelViewSet):
             return Response(data)
         else:
             return Response(serializer.errors)
+
+class LogoutUserView(viewsets.ModelViewSet):  
+
+    def patch(self, request, format=None, *args, **kwargs):
+        try :
+            print(request.META)
+            print(request.user.auth_token)
+        except:
+            print("No")
+        return Response(status=status.HTTP_200_OK)

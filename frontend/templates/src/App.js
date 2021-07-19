@@ -3,7 +3,7 @@ import ToDoList from './todolist';
 import Createtodo from './Createtodo';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import EditToDo from './EditTodo';
-// import Login from './login';
+import Login from './Login';
 
 function App() {
   return (
@@ -21,9 +21,9 @@ function App() {
             <Route exact path="/edit/:id">
               <EditToDo/>
             </Route>
-            {/* <Route exact path="/login">
+            <Route exact path="/login">
               <Login/>
-            </Route> */}
+            </Route>
           </Switch>
         </div>
       </div>

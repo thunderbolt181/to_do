@@ -15,11 +15,6 @@ from rest_framework import status
 # DELETE -> destroy(self, request, pk, format=None)
 # POST- > create(self, request, format=None)
 
-
-class ListView(viewsets.ModelViewSet):
-    queryset = to_do.objects.all()
-    serializer_class = todoSerializer
-
 class ToDoView(viewsets.ViewSet):
 
     def get_object(self):
