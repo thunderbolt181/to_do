@@ -1,9 +1,11 @@
 import { useState } from "react";
-// import { useHistory } from "react-router-dom";
 import PostRequest from "./request/postrequest";
+import Cookies from 'universal-cookie';
+import { useHistory } from "react-router-dom";
+
 
 const Login = () => {
-    // const history = useHistory();
+    const history = useHistory();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading,setLoading] = useState(false);
@@ -12,8 +14,17 @@ const Login = () => {
     const handlePost = async (values) => {
         const {data,error} = await PostRequest('/login',values);
         if (data != null){
-            setLoading(false);
-            console.log(data);
+            const options =  { 
+                path: '/',
+                secure:true,
+                sameSite:true,
+            };
+            // console.log(data.token);
+            const cookies = new Cookies();
+            cookies.set('to_do_auth_token', data.token ,options);
+            console.log(cookies.get('to_do_auth_token'))
+            history.push(``);
+            // setLoading(false);
         }
         if (error != null){
             setLoading(false);

@@ -23,7 +23,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 router = routers.DefaultRouter()
 router.register(r'todoviews',apiviews.ToDoView,'todoview')
 router.register(r'register',usersviews.RegisterView,'register')
-router.register(r'logoutuser',usersviews.LogoutUserView,'logoutuser')
+router.register(r'logout',usersviews.LogoutUserView,'logout')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

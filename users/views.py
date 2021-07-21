@@ -21,9 +21,5 @@ class RegisterView(viewsets.ModelViewSet):
 class LogoutUserView(viewsets.ModelViewSet):  
 
     def patch(self, request, format=None, *args, **kwargs):
-        try :
-            print(request.META)
-            print(request.user.auth_token)
-        except:
-            print("No")
+        request.user.auth_token.delete()
         return Response(status=status.HTTP_200_OK)

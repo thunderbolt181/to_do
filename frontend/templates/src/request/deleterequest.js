@@ -1,22 +1,21 @@
 import { getCookie } from "../csrfToken";
 import axios from "axios";
+import Cookies from 'universal-cookie';
 
 const DeleteRequest = (url) => {
     async function createPost(url) {
       var data = null;
       var error = null;
+      const cookie = new Cookies()
       await axios.delete(url,{
             headers:{
-                "X-CSRFToken": getCookie('csrftoken')
+                "X-CSRFToken": getCookie('csrftoken'),
+                'Authorization':`Token ${cookie.get("to_do_auth_token")}`,
             } 
         })
         .then(res => {
             data = res.data
-            // if (res.data.valid){
-            //     history.push('/')
-            // }
         }).catch(err => {
-            // setErrors(err.message);
             error= err.message
         })
         return {data,error}

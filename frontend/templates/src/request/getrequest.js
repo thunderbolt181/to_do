@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 
 const GetRequest = (url) => {
 
@@ -8,7 +9,12 @@ const GetRequest = (url) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        axios.get(url)
+        const cookie = new Cookies()
+        axios.get(url,{
+                headers:{
+                    'Authorization':`Token ${cookie.get("to_do_auth_token")}`,
+                }
+            })
             .then(res => {
                 setData(res.data);
                 setIsPending(false);

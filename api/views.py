@@ -7,6 +7,8 @@ from .models import to_do
 from .serializers import todoSerializer,todoPostSerializer,todoPutSerializer
 from django.http import Http404
 from rest_framework import status
+from rest_framework.authentication import TokenAuthentication , SessionAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 # pk is only used when primary key is use in url
 # GET -> retrieve(self, request, pk, format=None)
@@ -16,6 +18,8 @@ from rest_framework import status
 # POST- > create(self, request, format=None)
 
 class ToDoView(viewsets.ViewSet):
+    authentication_classes = (TokenAuthentication,SessionAuthentication)
+    permission_classes = (IsAuthenticated,)
 
     def get_object(self):
         pk = self.kwargs['pk']
