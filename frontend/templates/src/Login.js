@@ -19,12 +19,10 @@ const Login = () => {
                 secure:true,
                 sameSite:true,
             };
-            // console.log(data.token);
             const cookies = new Cookies();
             cookies.set('to_do_auth_token', data.token ,options);
             console.log(cookies.get('to_do_auth_token'))
             history.push(``);
-            // setLoading(false);
         }
         if (error != null){
             setLoading(false);

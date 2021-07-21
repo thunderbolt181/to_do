@@ -6,13 +6,22 @@ const PostRequest = (url,values) => {
     async function createPost(url,values) {
       var data = null;
       var error = null;
+      var header = {};
       const cookie = new Cookies()
+      if (cookie.get("to_do_auth_token")!==undefined){
+        header = {
+            'Content-Type': 'application/json',
+            "X-CSRFToken": getCookie('csrftoken'),
+            'Authorization':`Token ${cookie.get("to_do_auth_token")}`,
+        }
+      }else{
+        header = {
+            'Content-Type': 'application/json',
+            "X-CSRFToken": getCookie('csrftoken'),
+        }
+      }
       await axios.post(url,JSON.stringify(values),{
-          headers:{
-                  'Content-Type': 'application/json',
-                  "X-CSRFToken": getCookie('csrftoken'),
-                  'Authorization':`Token ${cookie.get("to_do_auth_token")}`,
-              }
+          headers:header,
           })
         .then((res) => {
           data = res.data

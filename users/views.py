@@ -3,10 +3,11 @@ from .serializers import userSerializer, RegisterSerializer
 from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework.response import Response
-from rest_framework.authtoken.models import Token
 from rest_framework import status
+from rest_framework.permissions import AllowAny
 
 class RegisterView(viewsets.ModelViewSet):
+    permission_classes=(AllowAny,)
 
     def create(self, request, *args, **kwargs):
         serializer = RegisterSerializer(data=request.data)
@@ -18,7 +19,7 @@ class RegisterView(viewsets.ModelViewSet):
         else:
             return Response(serializer.errors)
 
-class LogoutUserView(viewsets.ModelViewSet):  
+class LogoutUserView(viewsets.ModelViewSet):
 
     def patch(self, request, format=None, *args, **kwargs):
         request.user.auth_token.delete()
