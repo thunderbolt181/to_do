@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import PatchRequest from "./request/patchrequest";
 import logo from './logo192.png';
@@ -6,21 +5,17 @@ import Cookies from 'universal-cookie';
 
 const Navbar = ({path}) => {
     const history = useHistory();
-    const [loading,setLoading] = useState(false);
     const handlePatch = async () => {
         const cookie = new Cookies()
         const {data,error} = await PatchRequest('/api/logout/',null);
         if (data != null){
-            setLoading(false);
             cookie.remove("to_do_auth_token");
             history.push(`/login`);
         }
         if (error != null){
-            setLoading(false);
+            console.log(error);
         }
     }
-
-    console.log(path)
 
     return ( 
         <div className="navbar d-flex felx-row">
@@ -29,7 +24,8 @@ const Navbar = ({path}) => {
                 <h1 className="m-auto p-2">TO-DO</h1>
             </div>
             <div className="p-1 d-flex flex-row">
-                {path==="/"?(<div>
+                {path==="/"?(
+                        <div>
                             <Link className="link" to="/">Home</Link>
                             <button className="link" onClick={handlePatch}>Logout</button>
                         </div>):

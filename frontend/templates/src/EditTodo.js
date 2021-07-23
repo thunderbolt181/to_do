@@ -34,8 +34,11 @@ const EditToDo = () => {
         }
         if(error!=null){
             setLoader(true);
+            if (error[1] === 401){
+                history.push("/login")
+            }
         }
-    }, [todolist,error])
+    }, [todolist,error,history])
 
     const handleSuccess = (success) => {
         if (success){

@@ -1,13 +1,13 @@
 import GetRequest from "./request/getrequest";
 import { useEffect,useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const ToDoList = () => {
     let options = {  
         weekday: "long", year: "numeric", month: "short",  
         day: "numeric", hour: "2-digit", minute: "2-digit"  
     };  
-    
+    const history = useHistory();
     const {data:todolist, ispending, error} = GetRequest('api/todoviews');
     const [counting, setCounting] = useState(false);
     const [loader,setLoader] = useState(false);
@@ -30,8 +30,11 @@ const ToDoList = () => {
         }
         if (error != null){
             setLoader(true);
+            if (error[1] === 401){
+                history.push("/login")
+            }
         }
-    },[todolist,error]);
+    },[todolist,error,history]);
     
     return ( 
         <div className="to-do">

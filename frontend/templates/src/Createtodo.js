@@ -16,8 +16,11 @@ const Createtodo = () => {
             history.push(`/edit/${data.id}`)
         }
         if (error != null){
-            setLoading(false);
             setErrors(error);
+            setLoading(false);
+            if (error[1] === 401){
+                history.push("/login")
+            }
         }
     }
 

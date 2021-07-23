@@ -27,7 +27,7 @@ const PostRequest = (url,values) => {
           data = res.data
         })
         .catch((err) => {
-          error= err.message
+          error= [err.response.message,err.response.status]
         })
         return {data,error}
       }

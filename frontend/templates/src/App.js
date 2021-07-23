@@ -9,32 +9,30 @@ import Register from './register';
 function App() {
   return (
     <Router>
-      <div className="main vh-100">
         <div className="main vh-100">
-          <Switch>
-            <Route exact path="/">
-              <Navbar path={"/"}/>
-              <ToDoList/>
-            </Route>
-            <Route exact path="/create">
-              <Navbar path={"/"}/>
-              <Createtodo/>
-            </Route>
-            <Route exact path="/edit/:id">
-              <Navbar path={"/"}/>
-              <EditToDo/>
-            </Route>
-            <Route exact path="/login">
-              <Navbar path={"/login"}/>
-              <Login/>
-            </Route>
-            <Route exact path="/register">
-              <Navbar path={"/register"}/>
-              <Register/>
-            </Route>
-          </Switch>
-        </div>
-      </div>
+            <Switch>
+              <Route exact path="/">
+                <Navbar path={"/"}/>
+                <ToDoList/>
+              </Route>
+              <Route exact path="/create">
+                <Navbar path={"/"}/>
+                <Createtodo/>
+              </Route>
+              <Route exact path="/edit/:id">
+                <Navbar path={"/"}/>
+                <EditToDo/>
+              </Route>
+              <Route exact path="/login">
+                <Navbar path={"/login"}/>
+                <Login/>
+              </Route>
+              <Route exact path="/register">
+                <Navbar path={"/register"}/>
+                <Register/>
+              </Route>
+            </Switch>
+          </div>
     </Router>
   );
 }

@@ -21,7 +21,7 @@ const GetRequest = (url) => {
             })
             .catch((err) => {
                 setIsPending(false);
-                setError(err.message);
+                setError([err.response.message,err.response.status]);
             })
         },[url]);
 
