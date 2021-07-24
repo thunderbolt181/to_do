@@ -67,8 +67,9 @@ CORS_ORIGIN_WHITELIST = [
 print()
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        # 'to_do.authentication.UserAuthentication',
     ],
 }
 

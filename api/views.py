@@ -8,10 +8,11 @@ from .serializers import todoSerializer,todoPostSerializer,todoPutSerializer
 from django.http import Http404
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication , SessionAuthentication
+from to_do.authentication import UserAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 class ToDoView(viewsets.ViewSet):
-    authentication_classes = (TokenAuthentication,SessionAuthentication)
+    authentication_classes = (TokenAuthentication,SessionAuthentication,UserAuthentication)
     permission_classes = (IsAuthenticated,)
 
     def get_object(self,r_user):

@@ -5,3 +5,9 @@ def index(request,*args,**kwargs):
         return render(request,'build\index.html')
     except FileNotFoundError:
         return "production build of react app not found(Index file missing)"
+
+def fakeloginview(request,*args,**kwargs):
+    try:
+        return render(request,'build\index.html')
+    except FileNotFoundError:
+        return "production build of react app not found(Index file missing)"

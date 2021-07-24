@@ -24,11 +24,12 @@ router = routers.DefaultRouter()
 router.register(r'todoviews',apiviews.ToDoView,'todoview')
 router.register(r'register',usersviews.RegisterView,'register')
 router.register(r'logout',usersviews.LogoutUserView,'logout')
+router.register(r'Userlogin',usersviews.LoginUserView,'Userlogin')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include(router.urls)),
     path('',include("frontend.urls")),
-    path('login',obtain_auth_token, name='login')
+    # path('loginUser',obtain_auth_token, name='loginUser'),
 ] 
 
