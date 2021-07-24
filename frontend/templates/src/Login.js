@@ -25,7 +25,11 @@ const Login = () => {
         }
         if (error != null){
             setLoading(false);
-            setErrors(error);
+            if (error[1] === 400){
+                setErrors("Incorrect Username/Password");
+            }else{
+                setErrors(error)
+            }
         }
     }
 
