@@ -18,7 +18,7 @@ const Createtodo = () => {
         if (error != null){
             setErrors(error);
             setLoading(false);
-            if (error[1] === 401){
+            if (error[1] === 403){
                 history.push("/login")
             }
         }

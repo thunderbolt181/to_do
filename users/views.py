@@ -1,3 +1,5 @@
+from to_do.authentication import UserAuthentication
+from rest_framework import response
 from .serializers import RegisterSerializer
 from django.contrib.auth.models import User
 from rest_framework import viewsets
@@ -23,25 +25,30 @@ class RegisterView(viewsets.ModelViewSet):
             return Response(serializer.errors)
 
 class LogoutUserView(viewsets.ModelViewSet):
-    authentication_classes = (TokenAuthentication,SessionAuthentication)
+    authentication_classes = (UserAuthentication,SessionAuthentication)
 
     def patch(self, request, format=None, *args, **kwargs):
         try:
             Token.objects.get(user=request.user).delete()
-            return Response(status=status.HTTP_200_OK)
+            response = Response(status=status.HTTP_200_OK)
+            response.delete_cookie('auth_token_cookie')
+            return response
         except Token.DoesNotExist:
-            return Response(status=status.HTTP_200_OK)
+            response = Response(status=status.HTTP_200_OK)
+            response.delete_cookie('auth_token_cookie')
+            return response
 
 class LoginUserView(viewsets.ModelViewSet):
-
+    authentication_classes = (SessionAuthentication,)
     def create(self, request, *args, **kwargs):
         if request.data['username'] and request.data['password']:
-            Username = request.data['username']
-            Password = request.data['password']
+            Username, Password = request.data['username'], request.data['password']
             user = auth.authenticate(username=Username, password=Password)
             if user:
                 token, created = Token.objects.get_or_create(user=user)
-                return Response({'token': token.key},status=status.HTTP_200_OK)
+                response = Response(status=status.HTTP_200_OK)
+                response.set_cookie('auth_token_cookie',token.key,httponly=True,samesite='strict')
+                return response
             else:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
         else:

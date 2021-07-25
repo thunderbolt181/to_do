@@ -12,7 +12,7 @@ from to_do.authentication import UserAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 class ToDoView(viewsets.ViewSet):
-    authentication_classes = (TokenAuthentication,SessionAuthentication,UserAuthentication)
+    authentication_classes = (UserAuthentication,SessionAuthentication)
     permission_classes = (IsAuthenticated,)
 
     def get_object(self,r_user):

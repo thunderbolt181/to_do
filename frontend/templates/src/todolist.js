@@ -30,7 +30,7 @@ const ToDoList = () => {
         }
         if (error != null){
             setLoader(true);
-            if (error[1] === 401){
+            if (error[1] === 403){
                 history.push("/login")
             }
         }

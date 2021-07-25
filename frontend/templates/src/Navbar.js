@@ -1,15 +1,14 @@
 import { Link, useHistory } from "react-router-dom";
 import PatchRequest from "./request/patchrequest";
 import logo from './logo192.png';
-import Cookies from 'universal-cookie';
+// import Cookies from 'universal-cookie';
 
 const Navbar = ({path}) => {
     const history = useHistory();
     const handlePatch = async () => {
-        const cookie = new Cookies()
+        // const cookie = new Cookies()
         const {data,error} = await PatchRequest('/api/logout/',null);
         if (data != null){
-            cookie.remove("to_do_auth_token");
             history.push(`/login`);
         }
         if (error != null){

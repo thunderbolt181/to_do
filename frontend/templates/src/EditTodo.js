@@ -34,7 +34,7 @@ const EditToDo = () => {
         }
         if(error!=null){
             setLoader(true);
-            if (error[1] === 401){
+            if (error[1] === 403){
                 history.push("/login")
             }
         }
@@ -84,6 +84,9 @@ const EditToDo = () => {
         if (error != null){
             setLoading(false);
             setErrors(error);
+            if (error[1] === 403){
+                history.push("/login")
+            }
         }
     }
 
