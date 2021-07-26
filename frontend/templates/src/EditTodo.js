@@ -18,6 +18,7 @@ const EditToDo = () => {
     const [loading,setLoading] = useState(false);
     const [loader,setLoader] = useState(false);
     const [created,setCreated] = useState(null);
+    const [success, setSuccess] = useState(null);
 
     const {data:todolist, ispending,error} = GetRequest(`/api/todoviews/${id}`);
     const [errors,setErrors] = useState(error);
@@ -34,19 +35,12 @@ const EditToDo = () => {
         }
         if(error!=null){
             setLoader(true);
+            setErrors(error[0]);
             if (error[1] === 403){
                 history.push("/login")
             }
         }
     }, [todolist,error,history])
-
-    const handleSuccess = (success) => {
-        if (success){
-            return `<div class="alert alert-success bg-color-primary" role="alert">Changes have been made Successfully</div>`
-        }else{
-            return `<div class="alert alert-danger" role="alert">Looks like you entered something wrong</div>`
-        }
-    }
 
     const handleCompleted = () => {
         if (completed){
@@ -77,13 +71,14 @@ const EditToDo = () => {
             todolist.title = title;
             todolist.tasks = task;
             todolist.completed = completed;
-            var msg = handleSuccess(data.valid)
+            setErrors(null);
+            setSuccess(data.valid);
             values = {};
-            document.getElementById('submitalert').innerHTML=msg
         }
         if (error != null){
             setLoading(false);
             setErrors(error);
+            setSuccess(null);
             if (error[1] === 403){
                 history.push("/login")
             }
@@ -108,6 +103,7 @@ const EditToDo = () => {
             }
         }
         if (error != null){
+            setSuccess(null);
             setErrors(error);
         }
     }
@@ -124,10 +120,10 @@ const EditToDo = () => {
                 </div>
                 <div className="card-body">
                     {errors && <div className="alert alert-danger" role="alert">{errors}</div>}
-                    {error && <div className="alert alert-danger" role="alert">{error}</div>}
                     {ispending && <div>Loading...</div>}
                     <form className="d-flex flex-column" >
-                        <div id="submitalert"></div>
+                        { success !== null && <div>{success ? (<div className="alert alert-success bg-color-primary" role="alert">Changes have been made Successfully</div>):
+                                    (<div className="alert alert-danger" role="alert">Looks like you entered something wrong</div>)}</div>}
                         <div className="d-flex flex-row justify-content-between mx-2">
                             <h2 >Title</h2>
                             <div className="my-auto mx-2">
