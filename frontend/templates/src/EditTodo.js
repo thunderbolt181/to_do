@@ -112,7 +112,7 @@ const EditToDo = () => {
         <div className="create">
             {!loader ? (<div className="justify-content-center d-flex"><div className="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div></div>):
             (<div className="card mb-5">
-                <div className={'card-header border rounded d-flex flex-row justify-content-between'}>
+                <div className={'card-header rounded d-flex flex-row justify-content-between'}>
                     <h1 className="card-title my-auto">Edit</h1>
                     <div className="my-auto mx-4" onClick={handleDelete} >
                         <i className="fa fa-trash" style={{color:'red',fontSize:'24px'}} aria-hidden="true" ></i>
@@ -136,7 +136,7 @@ const EditToDo = () => {
                         <textarea required value={task} onChange={(e) => setTask(e.target.value)} ></textarea>
                         <p className="mb-0 text-end text-secondary">{new Date(created).toLocaleTimeString("en-us", options)}</p>
                         {loading ? (<div className="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div>):
-                            (<button className="btn btn-primary" onClick={handleSubmit}>Save</button>)}
+                            (<button className="link mx-auto" onClick={handleSubmit}>Save</button>)}
                     </form>
                 </div>
             </div>)}

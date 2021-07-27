@@ -26,7 +26,7 @@ const Navbar = ({path}) => {
                 {path==="/"?(
                         <div>
                             <Link className="link" to="/">Home</Link>
-                            <button className="link" onClick={handlePatch}>Logout</button>
+                            <button className="link py-2" onClick={handlePatch}>Logout</button>
                         </div>):
                     null}
                 {path==="/login"?<Link className="link" to="/register">Register</Link>:null}

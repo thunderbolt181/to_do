@@ -36,8 +36,8 @@ const Login = () => {
     return ( 
         <div className="create">
             <div className="card mb-5">
-                <div className={'card-header border rounded d-flex'}>
-                    <h3 className="card-title m-auto">Login</h3>
+                <div className=' d-flex heading'>
+                    <h3 className=" m-auto py-2">Login</h3>
                 </div>
                 <div className="card-body">
                     {errors && <div className="alert alert-danger" role="alert">{errors}</div>}

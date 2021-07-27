@@ -4,7 +4,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: lightblue;
+  background-color: #121212;
 }
 
 a, a:hover, a:focus, a:active {
@@ -27,7 +27,7 @@ code {
 
 .navbar{
   padding : 5px 20px;
-  background-color: #041434;
+  background-color: #222222;
   color:#FFF;
 }
 
@@ -35,8 +35,8 @@ code {
   padding: 10px 15px;
   margin: auto 2px;
   border-radius: 9px;
-  background-color: #049CE4;
-  border:none;
+  background-color: #332940;
+  border: #7C7C7C solid 1px;
   color: #FFF;
   font-size: 15px;
 }
@@ -53,9 +53,18 @@ code {
   justify-content: start;
 }
 
+.heading{
+  background-color: #121212;
+  border-radius: 10px 10px 0px 0px;
+  border: #242424 solid 0px;
+  padding: 10px 10px
+}
+
 .card{
-  border-left: darkblue solid 5px;
+  border: #7C7C7C solid 1px;
   border-radius: 10px;
+  background-color:#2C2C2C ;
+  color: #FFF;
 }
 
 label{
@@ -73,7 +82,9 @@ form textarea, input{
   margin: 5px 0px;
   padding: 10px 10px;
   border-radius: 5px;
-  border : lightgrey solid 1px;
+  border : #3f3f3f solid 1px;
+  color: #dfdfdf;
+  background-color: #434343;
 }
 
 form textarea{

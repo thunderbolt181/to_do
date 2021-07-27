@@ -40,19 +40,19 @@ const ToDoList = () => {
         <div className="to-do">
             {!loader ? (<div className="justify-content-center d-flex"><div className="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div></div>):
             (<div>
-                <div className="card mb-2" >
-                <div className={'card-header border rounded d-flex flex-row justify-content-between'}>
+                <div className="card mb-3" >
+                <div className={'card-header d-flex flex-row justify-content-between'}>
                     {counting && <h3 className="card-title my-auto">{counting}</h3>}
-                    <Link to="/create" className="btn btn-primary" >Create New</Link>
+                    <Link to="/create" className="link " >Create New</Link>
                 </div>
             </div>
             {error && <div className="alert alert-danger bg-color-primary" role="alert">{error}</div>}
             {ispending && <div>Loading..</div>}
             {todolist && <div>{todolist.map((item) => (
-                <div className="card mb-5" key={item.id}>
-                    <div className={'card-header border rounded d-flex flex-row justify-content-between'}>
+                <div className="card mb-2" key={item.id}>
+                    <div className={'heading d-flex flex-row justify-content-between'}>
                         <h3 className="card-title my-auto">{item.title}</h3>
-                        <Link to={`/edit/${item.id}`} className="btn btn-primary" >Edit</Link>
+                        <Link to={`/edit/${item.id}`} className="link " >Edit</Link>
                     </div>
                     <div className="card-body">
                         <p className="card-text">{item.tasks}</p>

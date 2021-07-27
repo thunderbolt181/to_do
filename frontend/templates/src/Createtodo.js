@@ -34,7 +34,7 @@ const Createtodo = () => {
     return (
         <div className="create">
             <div className="card mb-5">
-                <div className={'card-header border rounded d-flex'}>
+                <div className={'card-header rounded d-flex'}>
                     <h3 className="card-title m-auto">Create a new TO-DO List</h3>
                 </div>
                 <div className="card-body">
@@ -45,7 +45,7 @@ const Createtodo = () => {
                         <label>Task</label>
                         <textarea required value={tasks} onChange={(e) => setTasks(e.target.value)} ></textarea>
                         {loading ? (<div className="lds-ellipsis loading"><div></div><div></div><div></div><div></div></div>):
-                        (<button className="btn btn-primary" >Save</button>)}
+                        (<button className="link mx-auto" >Save</button>)}
                     </form>
                 </div>
             </div>
