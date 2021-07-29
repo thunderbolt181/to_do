@@ -48,25 +48,28 @@ const ToDoList = () => {
             </div>
             {error && <div className="alert alert-danger bg-color-primary" role="alert">{error}</div>}
             {ispending && <div>Loading..</div>}
-            {todolist && <div>{todolist.map((item) => (
-                <div className="card mb-2" key={item.id}>
-                    <div className={'heading d-flex flex-row justify-content-between'}>
-                        <h3 className="card-title my-auto">{item.title}</h3>
-                        <Link to={`/edit/${item.id}`} className="link " >Edit</Link>
-                    </div>
-                    <div className="card-body">
-                        <p className="card-text">{item.tasks}</p>
-                        <div className="d-flex f-row justify-content-between">
-                            <div className="my-auto mx-2">
-                                Completed :  {item.completed && <i className="fa fa-check" style={{color:'green'}} aria-hidden="true"></i>}
-                                {!item.completed && <i className="fa fa-times" style={{color:'red'}} aria-hidden="true"></i>}
+            {todolist && <div className="row">{todolist.map((item) => (
+                    <div className="col-xl-6" key={item.id}>
+                        <div className="card mb-2" >   
+                            <div className={'heading d-flex flex-row justify-content-between'}>
+                                <h3 className="card-title my-auto">{item.title}</h3>
+                                <Link to={`/edit/${item.id}`} className="link " >Edit</Link>
                             </div>
-                            <p className="mb-0 text-end text-secondary">{new Date(item.created_at).toLocaleTimeString("en-us", options)}</p>
+                            <div className="card-body">
+                                <p className="card-text">{item.tasks}</p>
+                                <div className="d-flex f-row justify-content-between">
+                                    <div className="my-auto mx-2">
+                                        Completed :  {item.completed && <i className="fa fa-check" style={{color:'green'}} aria-hidden="true"></i>}
+                                        {!item.completed && <i className="fa fa-times" style={{color:'red'}} aria-hidden="true"></i>}
+                                    </div>
+                                    <p className="mb-0 text-end text-secondary">{new Date(item.created_at).toLocaleTimeString("en-us", options)}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            ))}</div>}    
+            ))}</div>}
             </div>)}
+            
         </div>
      );
 }
