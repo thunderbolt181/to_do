@@ -1,13 +1,11 @@
-import os
 from django.db.models import Q
-# from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.response import Response
 from .models import to_do
 from .serializers import todoSerializer,todoPostSerializer,todoPutSerializer
 from django.http import Http404
 from rest_framework import status
-from rest_framework.authentication import TokenAuthentication , SessionAuthentication
+from rest_framework.authentication import SessionAuthentication
 from to_do.authentication import UserAuthentication
 from rest_framework.permissions import IsAuthenticated
 
@@ -54,5 +52,3 @@ class ToDoView(viewsets.ViewSet):
         instance = self.get_object(request.user)
         instance.delete()
         return Response({"valid":True})
-
-    

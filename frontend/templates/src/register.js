@@ -1,6 +1,5 @@
 import { useState } from "react";
 import PostRequest from "./request/postrequest";
-import Cookies from 'universal-cookie';
 import { useHistory } from "react-router-dom";
 
 
@@ -18,12 +17,6 @@ const Register = () => {
     const handlePost = async (values) => {
         const {data,error} = await PostRequest('/api/register/',values);
         if (data != null){
-            var options =  { 
-                path: '/',
-                sameSite:true,
-            };
-            const cookies = new Cookies();
-            cookies.set('to_do_auth_token', data.token ,options);
             history.push('/');
         }
         if (error != null){
