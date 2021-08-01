@@ -38,6 +38,8 @@ const EditToDo = () => {
             setErrors(error[0]);
             if (error[1] === 403){
                 history.push("/login")
+            }else if (error[1]===404){
+                history.push("/NotFound")
             }
         }
     }, [todolist,error,history])
@@ -81,6 +83,8 @@ const EditToDo = () => {
             setSuccess(null);
             if (error[1] === 403){
                 history.push("/login")
+            }else if (error[1]===404){
+                history.push("/NotFound")
             }
         }
     }
@@ -104,6 +108,9 @@ const EditToDo = () => {
         }
         if (error != null){
             setSuccess(null);
+            if (error[1]===404){
+                history.push("/NotFound")
+            }
             setErrors(error);
         }
     }

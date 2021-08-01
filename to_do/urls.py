@@ -27,7 +27,7 @@ router.register(r'logout',usersviews.LogoutUserView,'logout')
 router.register(r'Userlogin',usersviews.LoginUserView,'Userlogin')
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('adminpanel_django/', admin.site.urls),
     path('api/',include(router.urls)),
     path('',include("frontend.urls")),
     # path('loginUser',obtain_auth_token, name='loginUser'),

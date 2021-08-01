@@ -1,12 +1,10 @@
 import { Link, useHistory } from "react-router-dom";
 import PatchRequest from "./request/patchrequest";
 import logo from './logo192.png';
-// import Cookies from 'universal-cookie';
 
 const Navbar = ({path}) => {
     const history = useHistory();
     const handlePatch = async () => {
-        // const cookie = new Cookies()
         const {data,error} = await PatchRequest('/api/logout/',null);
         if (data != null){
             history.push(`/login`);
@@ -31,6 +29,7 @@ const Navbar = ({path}) => {
                     null}
                 {path==="/login"?<Link className="link" to="/register">Register</Link>:null}
                 {path==="/register"?<Link className="link" to="/login">Login</Link>:null}
+                {path==="/NotFound"?<Link className="link" to="/">Home</Link>:null}
             </div>
         </div>
      );

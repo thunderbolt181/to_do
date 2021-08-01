@@ -32,6 +32,8 @@ const ToDoList = () => {
             setLoader(true);
             if (error[1] === 403){
                 history.push("/login")
+            }else if (error[1]===404){
+                history.push("/NotFound")
             }
         }
     },[todolist,error,history]);
@@ -50,13 +52,13 @@ const ToDoList = () => {
             {ispending && <div>Loading..</div>}
             {todolist && <div className="row">{todolist.map((item) => (
                     <div className="col-xl-6" key={item.id}>
-                        <div className="card mb-2" >   
+                        <div className="card mb-2" >
                             <div className={'heading d-flex flex-row justify-content-between'}>
                                 <h3 className="card-title my-auto">{item.title}</h3>
                                 <Link to={`/edit/${item.id}`} className="link " >Edit</Link>
                             </div>
                             <div className="card-body">
-                                <p className="card-text">{item.tasks}</p>
+                                <div className="card-text">{item.tasks.length > 125 ? <p>{item.tasks.substring(0,125)}...</p> : <p>{item.tasks}</p>}</div>
                                 <div className="d-flex f-row justify-content-between">
                                     <div className="my-auto mx-2">
                                         Completed :  {item.completed && <i className="fa fa-check" style={{color:'green'}} aria-hidden="true"></i>}

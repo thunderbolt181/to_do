@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import EditToDo from './EditTodo';
 import Login from './Login';
 import Register from './register';
+import NotFound from './pages/404_not_found';
 
 function App() {
   return (
@@ -30,6 +31,10 @@ function App() {
               <Route exact path="/register">
                 <Navbar path={"/register"}/>
                 <Register/>
+              </Route>
+              <Route path="/">
+                <Navbar path={"/NotFound"}/>
+                <NotFound/>
               </Route>
             </Switch>
           </div>
