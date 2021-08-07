@@ -40,6 +40,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8000/",
+  "proxy": "https://simple-todo.azurewebsites.net/",
   "devDependencies": {}
 }
