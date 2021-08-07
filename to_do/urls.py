@@ -18,7 +18,7 @@ from rest_framework import routers
 from django.urls import path,include
 from api import views as apiviews
 from users import views as usersviews
-from rest_framework.authtoken.views import obtain_auth_token
+# from rest_framework.authtoken.views import obtain_auth_token
 
 router = routers.DefaultRouter()
 router.register(r'todoviews',apiviews.ToDoView,'todoview')
