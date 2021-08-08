@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 @ensure_csrf_cookie
 def index(request,*args,**kwargs):
     try:
-        return render(request,'build\index.html')
+        return render(request,'build/index.html')
     except FileNotFoundError:
         return "production build of react app not found(Index file missing)"
 
@@ -13,6 +13,6 @@ def index(request,*args,**kwargs):
 @ensure_csrf_cookie
 def fakeloginview(request,*args,**kwargs):
     try:
-        return render(request,'build\index.html')
+        return render(request,'build/index.html')
     except FileNotFoundError:
         return "production build of react app not found(Index file missing)"
