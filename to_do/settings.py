@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False if os.getenv("DEBUG") == 'False' else True
 
-ALLOWED_HOSTS = ["localhost","127.0.0.1","simple-todo.azurewebsites.net"]
+ALLOWED_HOSTS = ["localhost","127.0.0.1"]
 
 
 # Application definition
@@ -67,8 +67,6 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:8000",
     "http://localhost:3000",
     "http://127.0.0.1:8000",
-    "https://simple-todo.azurewebsites.net",
-    'https://learningdjango.database.windows.net'
 ]
 
 REST_FRAMEWORK = {
