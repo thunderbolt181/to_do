@@ -59,4 +59,4 @@ jobs:
         with:
           app-name: 'simple-todo'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_545b4b528e8949ca9641ff2a25b0d2eb }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_6103220321f14cd28ea74aa382cc3266 }}
